@@ -1,32 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-const Card = ({data =[]}) => {
-  console.log(data);
-  if (!Array.isArray(data) || data.length === 0) {  
-    return <p>No news available</p>;  
-  }
-  const readMore=(url)=>{
-    window.open(url)
-  }
-  return (
-    <div className='cardcontainer'>
-       {data.map((curItem, index) => (
-        <div className='card' key={index}> 
-          <img 
-            src={curItem.urlToImage }  
-           
-          /> 
-          <div className='content'>
-            <a className='title' onclick={()=>readMore(curItem.url)}>{curItem.title} </a>  
-            <p>{curItem.description}</p>
-            <button onClick={()=>window.open(curItem.url)}> 
-              Read More 
-            </button>  
-          </div>
+const Card = ({ data }) => {
+    return (
+        <div className="cardcontainer">
+            {data.map((item, index) => (
+                <div className="card" key={index}>
+                    <img src={item.urlToImage || "https://via.placeholder.com/320x180"} alt="news" />
+                    <div className="content">
+                        <p className="title">{item.title}</p>
+                        <p className="description">{item.description}</p>
+                        <a href={item.url} target="_blank" rel="noopener noreferrer">
+                            <button>Read More</button>
+                        </a>
+                    </div>
+                </div>
+            ))}
         </div>
-      ))}
-       </div>
-  )
-}
+    );
+};
 
 export default Card;
